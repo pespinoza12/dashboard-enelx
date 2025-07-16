@@ -47,8 +47,13 @@ app.post('/api/update-dashboard', (req, res) => {
   });
 });
 
-// Fallback para React Router (SPA)
-app.get('*', (req, res) => {
+// Fallback para React Router (SPA) - usando middleware específico
+app.use((req, res, next) => {
+  // Si es una solicitud a la API, continúa
+  if (req.path.startsWith('/api/')) {
+    return next();
+  }
+  // Para todas las demás rutas, servir index.html
   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
 
