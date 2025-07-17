@@ -810,7 +810,7 @@ const EnelxProgressDashboard = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-gray-500">
-          <p className="text-sm">WA Contact Center | Projeto EnelX B2C | Dashboard atualizado: 17/07/2025</p>
+          <p className="text-sm">WA Contact Center | Projeto EnelX B2C | Dashboard atualizado: 17/07/2025 v2</p>
           <p className="text-xs mt-1">🎯 Equipe: 27 profissionais | 📅 Treinamentos: 23/07 | 🚀 Go-live: 1º de agosto</p>
         </div>
       </div>
