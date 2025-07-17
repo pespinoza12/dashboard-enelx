@@ -108,7 +108,7 @@ const EnelxProgressDashboard = () => {
       {text: "🚀 Tecnologia avançada para otimização de qualidade", timestamp: "14/07/2025", author: "Giovanni"},
       {text: "📊 Análise automatizada para melhoria contínua", timestamp: "14/07/2025", author: "Pedro Espinoza"},
       {text: "⚙️ Planejamento em curso para implementação", timestamp: "14/07/2025", author: "Giovanni"},
-      {text: "📋 Critérios de avaliação sendo definidos com Valéria", timestamp: "16/07/2025", author: "Pedro Espinoza"},
+      {text: "📋 Critérios de avaliação sendo definidos com Valéria e Elo", timestamp: "16/07/2025", author: "Pedro Espinoza"},
       {text: "🤖 Configuração IA para análise de ligações em desenvolvimento", timestamp: "16/07/2025", author: "Giovanni"},
       {text: "📅 Reunião marcada para 24/07 - apresentação da ferramenta", timestamp: "16/07/2025", author: "Pedro Espinoza"}
     ], startDate: '2025-08-01', endDate: '2025-08-31', progress: 35 },
@@ -399,7 +399,9 @@ const EnelxProgressDashboard = () => {
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-full px-4 py-2 flex items-center">
                   <Clock className="w-4 h-4 mr-2" />
-                  <span className="font-medium">18 dias restantes</span>
+                  <span className="font-medium">
+                    {Math.ceil((new Date('2025-08-01').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))} dias restantes
+                  </span>
                 </div>
               </div>
             </div>
