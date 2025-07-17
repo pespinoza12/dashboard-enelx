@@ -1,15 +1,19 @@
 {
   "id": "test-uuid-12345",
   "meetingDate": "2025-07-17T15:00:00.000Z",
-  "participants": ["Pedro Espinoza", "Daniela Belmock", "Carlos Junior"],
+  "participants": [
+    "Pedro Espinoza",
+    "Daniela Belmock",
+    "Carlos Junior"
+  ],
   "transcription": "Reunión del proyecto EnelX B2C del 17 de julio. Pedro informa que los acessos SWS están al 95% completados. Daniela confirma que Carlos ya puede crear los acessos restantes. El contrato Algar está finalizado al 100%. Los treinamentos están programados para iniciar el 23 de julio con 90% de preparación. WhatsApp oficial tendrá activación el 28-29 de julio, ya está al 85% de desarrollo. Fernando menciona que no hay problemas en el cronograma y todo marcha según lo planificado. La próxima reunión será presencial la próxima semana.",
   "metadata": {
     "duration": "45 minutes",
     "type": "weekly_status",
     "priority": "high"
   },
-  "processedAt": "2025-07-17T15:30:00.000Z",
-  "processedBy": "test_user",
-  "status": "pending_analysis",
+  "processedAt": "2025-07-17T15:08:48.220Z",
+  "processedBy": "claude-code-agent",
+  "status": "processed_by_claude",
   "filename": "reunion_test_2025-07-17_1705123456789.json"
 }
