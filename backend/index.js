@@ -8,14 +8,29 @@ app.use(express.json());
 // Servir archivos estáticos del frontend build
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
-// Health check endpoint
+// Health check endpoints
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     timestamp: new Date().toISOString(),
     project: 'Dashboard Manager - EnelX B2C 2025',
-    version: '1.0.0'
+    version: '1.0.0',
+    uptime: process.uptime(),
+    memory: process.memoryUsage()
   });
+});
+
+// Additional health check endpoints that EasyPanel might expect
+app.get('/health', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.get('/healthz', (req, res) => {
+  res.status(200).send('OK');
+});
+
+app.get('/ping', (req, res) => {
+  res.status(200).send('pong');
 });
 
 // API para obtener datos del dashboard
@@ -53,6 +68,18 @@ app.use((req, res, next) => {
   if (req.path.startsWith('/api/')) {
     return next();
   }
+  
+  // Si es una solicitud de archivos estáticos (js, css, etc.), no hacer fallback
+  if (req.path.startsWith('/assets/') || 
+      req.path.endsWith('.js') || 
+      req.path.endsWith('.css') || 
+      req.path.endsWith('.svg') || 
+      req.path.endsWith('.png') || 
+      req.path.endsWith('.jpg') || 
+      req.path.endsWith('.ico')) {
+    return next();
+  }
+  
   // Para todas las demás rutas, servir index.html
   res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
 });
@@ -62,7 +89,12 @@ const PORT = process.env.PORT || 3000;
 // Manejo de errores y señales
 process.on('SIGTERM', () => {
   console.log('🛑 SIGTERM received, shutting down gracefully...');
-  process.exit(0);
+  console.log('🔍 Process uptime:', process.uptime(), 'seconds');
+  console.log('🔍 Memory usage:', process.memoryUsage());
+  server.close(() => {
+    console.log('✅ Server closed gracefully');
+    process.exit(0);
+  });
 });
 
 process.on('SIGINT', () => {
@@ -72,6 +104,7 @@ process.on('SIGINT', () => {
 
 process.on('uncaughtException', (err) => {
   console.error('🚨 Uncaught Exception:', err);
+  console.error('🚨 Stack:', err.stack);
   process.exit(1);
 });
 
@@ -86,4 +119,25 @@ const server = app.listen(PORT, '0.0.0.0', () => {
   console.log(`🔧 API Health: http://localhost:${PORT}/api/health`);
   console.log(`⚡ Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🏗️  Static files: ${path.join(__dirname, '../frontend/dist')}`);
+  console.log(`🔍 Process ID: ${process.pid}`);
+  console.log(`🔍 Node version: ${process.version}`);
+  console.log(`🔍 Platform: ${process.platform}`);
+  console.log(`🔍 Working directory: ${process.cwd()}`);
+  
+  // Log periódico para mostrar que el servidor está activo
+  setInterval(() => {
+    console.log(`💓 Server heartbeat - uptime: ${Math.floor(process.uptime())}s`);
+  }, 30000); // Cada 30 segundos
+});
+
+server.on('error', (err) => {
+  console.error('🚨 Server error:', err);
+});
+
+server.on('connection', (socket) => {
+  console.log('🔗 New connection established');
+});
+
+server.on('close', () => {
+  console.log('🛑 Server closed');
 });
