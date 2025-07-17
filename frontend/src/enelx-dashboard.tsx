@@ -376,7 +376,7 @@ const EnelxProgressDashboard = () => {
             <div className="mb-6 lg:mb-0">
               <div className="flex items-center mb-4">
                 <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mr-4 p-2">
-                  <img src="/wa-logo.svg" alt="WA Contact Center" className="w-full h-full" />
+                  <img src="/images/wa-logo.png" alt="WA Contact Center" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
@@ -811,7 +811,7 @@ const EnelxProgressDashboard = () => {
         {/* Footer */}
         <div className="mt-6 text-center text-gray-500">
           <div className="flex items-center justify-center gap-2 mb-2">
-            <img src="/wa-logo.svg" alt="WA Contact Center" className="w-5 h-5" />
+            <img src="/images/wa-logo.png" alt="WA Contact Center" className="w-5 h-5 object-contain" />
             <p className="text-sm font-medium">Dashboard EnelX - WA Contact Center</p>
           </div>
           <p className="text-xs">🎯 Equipe: 27 profissionais | 📅 Treinamentos: 23/07 | 🚀 Go-live: 1º de agosto</p>
