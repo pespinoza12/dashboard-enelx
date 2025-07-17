@@ -12,6 +12,8 @@
     "build:production": "cd frontend && npm ci && npm run build",
     "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
     "deploy:build": "npm run build && echo 'Build completado - listo para deployment'",
+    "claude-agent": "node claude-agent.js",
+    "agent": "node claude-agent.js",
     "test": "echo 'Tests pendientes de implementar'",
     "lint": "cd frontend && npm run lint"
   },
@@ -30,7 +32,8 @@
     "npm": ">=8.0.0"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "node-fetch": "^2.6.7"
   },
   "devDependencies": {
     "concurrently": "^9.1.0"
