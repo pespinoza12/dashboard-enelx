@@ -1,9 +1,33 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
+const crypto = require('crypto');
 const app = express();
 
 // Middleware para parsing JSON
 app.use(express.json());
+
+// Configuración de seguridad
+const API_KEYS = [
+  'enelx_dashboard_key_2025',
+  'wa_contact_center_key',
+  'pedro_admin_key'
+];
+
+// Middleware de autenticación
+const authenticateAPI = (req, res, next) => {
+  const apiKey = req.headers['x-api-key'] || req.headers['authorization']?.replace('Bearer ', '');
+  
+  if (!apiKey || !API_KEYS.includes(apiKey)) {
+    return res.status(401).json({
+      error: 'API key requerida',
+      message: 'Incluye X-API-Key en headers'
+    });
+  }
+  
+  req.apiKey = apiKey;
+  next();
+};
 
 // Servir archivos estáticos del frontend build
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
@@ -46,20 +70,172 @@ app.get('/api/dashboard', (req, res) => {
  * API Endpoint para crear/actualizar dashboards.
  * Aquí implementaremos la lógica para modificar dashboards dinámicamente.
  */
-app.post('/api/update-dashboard', (req, res) => {
+app.post('/api/update-dashboard', authenticateAPI, (req, res) => {
   console.log('🔄 Petición recibida en /api/update-dashboard');
   console.log('📊 Datos del dashboard:', req.body);
+  console.log('🔑 API Key utilizada:', req.apiKey);
   
-  // TODO: Implementar lógica para actualizar dashboards
-  // - Validar datos recibidos
-  // - Actualizar archivos de configuración
-  // - Regenerar build si es necesario
+  try {
+    const { tasks, comments, progress, metadata } = req.body;
+    
+    // Validar estructura de datos
+    if (!tasks && !comments && !progress) {
+      return res.status(400).json({
+        error: 'Datos insuficientes',
+        message: 'Se requiere al menos tasks, comments o progress'
+      });
+    }
+    
+    // Actualizar archivo de datos del dashboard
+    const dashboardDataPath = path.join(__dirname, '../frontend/src/dashboard-data.json');
+    let dashboardData = {};
+    
+    // Leer datos existentes si el archivo existe
+    if (fs.existsSync(dashboardDataPath)) {
+      dashboardData = JSON.parse(fs.readFileSync(dashboardDataPath, 'utf8'));
+    }
+    
+    // Actualizar datos
+    if (tasks) dashboardData.tasks = { ...dashboardData.tasks, ...tasks };
+    if (comments) dashboardData.comments = [...(dashboardData.comments || []), ...comments];
+    if (progress) dashboardData.progress = { ...dashboardData.progress, ...progress };
+    if (metadata) dashboardData.metadata = { ...dashboardData.metadata, ...metadata };
+    
+    dashboardData.lastUpdated = new Date().toISOString();
+    dashboardData.updatedBy = req.apiKey;
+    
+    // Escribir datos actualizados
+    fs.writeFileSync(dashboardDataPath, JSON.stringify(dashboardData, null, 2));
+    
+    console.log('✅ Dashboard actualizado exitosamente');
+    
+    res.status(200).json({ 
+      message: 'Dashboard actualizado correctamente',
+      timestamp: new Date().toISOString(),
+      changes: {
+        tasks: tasks ? Object.keys(tasks).length : 0,
+        comments: comments ? comments.length : 0,
+        progress: progress ? Object.keys(progress).length : 0
+      },
+      data: req.body
+    });
+    
+  } catch (error) {
+    console.error('❌ Error actualizando dashboard:', error);
+    res.status(500).json({
+      error: 'Error interno del servidor',
+      message: error.message
+    });
+  }
+});
+
+/**
+ * Nuevo endpoint para procesar transcripciones de reuniones
+ */
+app.post('/api/process-transcription', authenticateAPI, (req, res) => {
+  console.log('📝 Petición recibida en /api/process-transcription');
+  console.log('🔑 API Key utilizada:', req.apiKey);
   
-  res.status(200).json({ 
-    message: 'Dashboard actualizado correctamente',
-    timestamp: new Date().toISOString(),
-    data: req.body
-  });
+  try {
+    const { transcription, meetingDate, participants, metadata } = req.body;
+    
+    if (!transcription) {
+      return res.status(400).json({
+        error: 'Transcripción requerida',
+        message: 'El campo transcription es obligatorio'
+      });
+    }
+    
+    // Crear directorio de transcripciones si no existe
+    const transcriptionsDir = path.join(__dirname, '../reuniones');
+    if (!fs.existsSync(transcriptionsDir)) {
+      fs.mkdirSync(transcriptionsDir, { recursive: true });
+    }
+    
+    // Generar nombre de archivo único
+    const date = meetingDate || new Date().toISOString().split('T')[0];
+    const timestamp = new Date().getTime();
+    const filename = `reunion_${date}_${timestamp}.json`;
+    const filepath = path.join(transcriptionsDir, filename);
+    
+    // Estructura de la transcripción
+    const transcriptionData = {
+      id: crypto.randomUUID(),
+      meetingDate: meetingDate || new Date().toISOString(),
+      participants: participants || [],
+      transcription: transcription,
+      metadata: metadata || {},
+      processedAt: new Date().toISOString(),
+      processedBy: req.apiKey,
+      status: 'pending_analysis',
+      filename: filename
+    };
+    
+    // Guardar transcripción
+    fs.writeFileSync(filepath, JSON.stringify(transcriptionData, null, 2));
+    
+    console.log(`✅ Transcripción guardada: ${filename}`);
+    
+    // TODO: Aquí se integrará el procesamiento con Claude API
+    // Por ahora devolvemos respuesta de éxito
+    
+    res.status(200).json({
+      message: 'Transcripción procesada correctamente',
+      transcriptionId: transcriptionData.id,
+      filename: filename,
+      status: 'saved',
+      nextStep: 'pending_ai_analysis',
+      timestamp: new Date().toISOString()
+    });
+    
+  } catch (error) {
+    console.error('❌ Error procesando transcripción:', error);
+    res.status(500).json({
+      error: 'Error interno del servidor',
+      message: error.message
+    });
+  }
+});
+
+/**
+ * Endpoint para listar transcripciones guardadas
+ */
+app.get('/api/transcriptions', authenticateAPI, (req, res) => {
+  try {
+    const transcriptionsDir = path.join(__dirname, '../reuniones');
+    
+    if (!fs.existsSync(transcriptionsDir)) {
+      return res.json({ transcriptions: [], count: 0 });
+    }
+    
+    const files = fs.readdirSync(transcriptionsDir)
+      .filter(file => file.endsWith('.json'))
+      .map(file => {
+        const filepath = path.join(transcriptionsDir, file);
+        const data = JSON.parse(fs.readFileSync(filepath, 'utf8'));
+        return {
+          id: data.id,
+          filename: file,
+          meetingDate: data.meetingDate,
+          participants: data.participants,
+          status: data.status,
+          processedAt: data.processedAt
+        };
+      })
+      .sort((a, b) => new Date(b.processedAt) - new Date(a.processedAt));
+    
+    res.json({
+      transcriptions: files,
+      count: files.length
+    });
+    
+  } catch (error) {
+    console.error('❌ Error listando transcripciones:', error);
+    res.status(500).json({
+      error: 'Error interno del servidor',
+      message: error.message
+    });
+  }
 });
 
 // Fallback para React Router (SPA) - usando middleware específico
