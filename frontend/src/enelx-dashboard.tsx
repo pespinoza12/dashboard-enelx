@@ -14,8 +14,10 @@ const EnelxProgressDashboard = () => {
     'rh-acessos': { completed: false, comments: [
       {text: "📝 Daniela enviará amanhã lista com nomes para Natália", timestamp: "14/07/2025", author: "Daniela Belmock"},
       {text: "⚡ Criação de acessos SWS e sistemas será iniciada", timestamp: "14/07/2025", author: "Pedro Espinoza"},
-      {text: "🎯 Lista da equipe finalizada e pronta para envio", timestamp: "14/07/2025", author: "Daniela Belmock"}
-    ], startDate: '2025-07-15', endDate: '2025-07-20', progress: 70 },
+      {text: "🎯 Lista da equipe finalizada e pronta para envio", timestamp: "14/07/2025", author: "Daniela Belmock"},
+      {text: "✅ CONFIRMADO: Carlos disse que já pode criar acessos no SWS", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "📋 Enviados dados hoje para Natália - em andamento", timestamp: "16/07/2025", author: "Daniela Belmock"}
+    ], startDate: '2025-07-15', endDate: '2025-07-20', progress: 85 },
     'rh-contratos': { completed: false, comments: [
       {text: "📋 Contratos sendo finalizados com estrutura de renovação", timestamp: "14/07/2025", author: "Daniela Belmock"}
     ], startDate: '2025-07-20', endDate: '2025-07-23', progress: 70 },
@@ -25,8 +27,11 @@ const EnelxProgressDashboard = () => {
       {text: "🎯 Equipe completa permite treinamento com mais segurança", timestamp: "09/07/2025", author: "Fernando"},
       {text: "📅 CRONOGRAMA CONFIRMADO: Início dos treinamentos 23 de julho", timestamp: "14/07/2025", author: "Daniela Belmock"},
       {text: "🎯 Treinamento intensivo para toda a equipe B2C", timestamp: "14/07/2025", author: "Valéria Santos"},
-      {text: "📚 Programa focado em procedimentos EnelX e atendimento", timestamp: "14/07/2025", author: "Equipe WA"}
-    ], startDate: '2025-07-23', endDate: '2025-07-31', progress: 85 },
+      {text: "📚 Programa focado em procedimentos EnelX e atendimento", timestamp: "14/07/2025", author: "Equipe WA"},
+      {text: "📋 50% veteranos da operação + 50% novos - estratégia definida", timestamp: "16/07/2025", author: "Daniela Belmock"},
+      {text: "🎯 Cronograma e convites já enviados para operadores", timestamp: "16/07/2025", author: "Valéria Santos"},
+      {text: "✅ Grade de treinamento finalizada com Valéria", timestamp: "16/07/2025", author: "Valéria Santos"}
+    ], startDate: '2025-07-23', endDate: '2025-07-31', progress: 90 },
     
     // Infraestrutura e Sistemas - 90% CONCLUÍDO
     'infra-telefonia': { completed: true, comments: [
@@ -49,13 +54,29 @@ const EnelxProgressDashboard = () => {
       {text: "📅 Reunião exclusiva marcada para detalhar implementação", timestamp: "09/07/2025", author: "Pedro Espinoza"},
       {text: "📅 ATIVAÇÃO PROGRAMADA: 28-29 de julho", timestamp: "14/07/2025", author: "Fábio Henrique"},
       {text: "🔧 Testes finais e validação com Twilio", timestamp: "14/07/2025", author: "Fábio Henrique"},
-      {text: "📊 Dashboard de monitoramento em desenvolvimento", timestamp: "14/07/2025", author: "Carlos Junior"}
-    ], startDate: '2025-07-28', endDate: '2025-08-01', progress: 80 },
+      {text: "📊 Dashboard de monitoramento em desenvolvimento", timestamp: "14/07/2025", author: "Carlos Junior"},
+      {text: "🔒 Bloqueio de áudio implementado - 100% PRONTO", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "🤖 Agente automático com opções funcionando", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "⏰ Dashboard atualizando a cada 10 segundos para testes", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "📊 Próxima semana: apresentação da tela de acompanhamento", timestamp: "16/07/2025", author: "Carlos Junior"}
+    ], startDate: '2025-07-28', endDate: '2025-08-01', progress: 90 },
     'infra-relatorios': { completed: false, comments: [
       {text: "📊 Estrutura de relatórios sendo otimizada", timestamp: "14/07/2025", author: "Giovanni"},
       {text: "⚡ Automatização de processos para maior eficiência", timestamp: "14/07/2025", author: "Giovanni"},
-      {text: "📈 Indicadores de performance em desenvolvimento", timestamp: "14/07/2025", author: "Nicolas Henry"}
-    ], startDate: '2025-08-01', endDate: '2025-08-15', progress: 40 },
+      {text: "📈 Indicadores de performance em desenvolvimento", timestamp: "14/07/2025", author: "Nicolas Henry"},
+      {text: "📊 BI vs Excel discutido - preferência por BI com export Excel", timestamp: "16/07/2025", author: "Natália"},
+      {text: "⚡ Necessidade de extrair dados históricos para auditoria", timestamp: "16/07/2025", author: "Natália"},
+      {text: "📈 Adição de TMO, ociosidade e métricas back-office", timestamp: "16/07/2025", author: "Pedro Espinoza"}
+    ], startDate: '2025-08-01', endDate: '2025-08-15', progress: 60 },
+    
+    // HSM e Campanhas - NOVA FASE
+    'infra-hsm': { completed: false, comments: [
+      {text: "🎯 PROGRAMADO: Desenvolvimento HSM para agosto", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "📋 Criação de campanhas e disparos programados", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "🚀 Construção em conjunto com equipe Enel", timestamp: "16/07/2025", author: "Carlos Junior"},
+      {text: "📱 Mensagens Welcome e confirmação de venda", timestamp: "16/07/2025", author: "Fernando"},
+      {text: "⚡ Tela para cadastro independente de mensagens", timestamp: "16/07/2025", author: "Carlos Junior"}
+    ], startDate: '2025-08-01', endDate: '2025-08-31', progress: 20 },
     
     // Gestão do Projeto - 60% CONCLUÍDO
     'gestao-reunioes': { completed: false, comments: [
@@ -64,8 +85,11 @@ const EnelxProgressDashboard = () => {
       {text: "👥 Próxima reunião semana 17/07 - Pedro estará no Brasil", timestamp: "09/07/2025", author: "Fernando"},
       {text: "📅 Acompanhamento semanal mantido com excelentes resultados", timestamp: "14/07/2025", author: "Pedro Espinoza"},
       {text: "✈️ Reunião presencial programada para próxima semana", timestamp: "14/07/2025", author: "Pedro Espinoza"},
-      {text: "🎯 Foco total no go-live de 1º de agosto", timestamp: "14/07/2025", author: "Pedro Espinoza"}
-    ], startDate: '2025-07-01', endDate: '2025-08-31', progress: 60 },
+      {text: "🎯 Foco total no go-live de 1º de agosto", timestamp: "14/07/2025", author: "Pedro Espinoza"},
+      {text: "✅ REUNIÃO 16/07: Alinhamento EnelX SAC realizada", timestamp: "16/07/2025", author: "Pedro Espinoza"},
+      {text: "🏆 Fernando confirmou: ZERO PROBLEMAS no cronograma!", timestamp: "16/07/2025", author: "Fernando"},
+      {text: "📅 Reunião presencial marcada para próxima semana", timestamp: "16/07/2025", author: "Pedro Espinoza"}
+    ], startDate: '2025-07-01', endDate: '2025-08-31', progress: 75 },
     'gestao-suporte': { completed: false, comments: [
       {text: "👨‍💻 Novo profissional de suporte operacional sendo incorporado", timestamp: "14/07/2025", author: "Equipe WA"},
       {text: "🔧 Especialista dedicado para questões tecnológicas EnelX", timestamp: "14/07/2025", author: "Equipe WA"},
@@ -83,8 +107,19 @@ const EnelxProgressDashboard = () => {
       {text: "🧠 PROJETO INOVADOR: Sistema de monitoramento com IA", timestamp: "14/07/2025", author: "Pedro Espinoza"},
       {text: "🚀 Tecnologia avançada para otimização de qualidade", timestamp: "14/07/2025", author: "Giovanni"},
       {text: "📊 Análise automatizada para melhoria contínua", timestamp: "14/07/2025", author: "Pedro Espinoza"},
-      {text: "⚙️ Planejamento em curso para implementação", timestamp: "14/07/2025", author: "Giovanni"}
-    ], startDate: '2025-08-01', endDate: '2025-08-31', progress: 25 }
+      {text: "⚙️ Planejamento em curso para implementação", timestamp: "14/07/2025", author: "Giovanni"},
+      {text: "📋 Critérios de avaliação sendo definidos com Valéria", timestamp: "16/07/2025", author: "Pedro Espinoza"},
+      {text: "🤖 Configuração IA para análise de ligações em desenvolvimento", timestamp: "16/07/2025", author: "Giovanni"},
+      {text: "📅 Reunião marcada para 24/07 - apresentação da ferramenta", timestamp: "16/07/2025", author: "Pedro Espinoza"}
+    ], startDate: '2025-08-01', endDate: '2025-08-31', progress: 35 },
+    
+    // Revisão URA - FUTURO
+    'gestao-ura': { completed: false, comments: [
+      {text: "💡 PLANEJAMENTO: Revisão da estrutura URA", timestamp: "16/07/2025", author: "Fernando"},
+      {text: "🔄 Metamorfose para modelo novo - não radical", timestamp: "16/07/2025", author: "Fernando"},
+      {text: "⏰ Aguardando término do projeto atual", timestamp: "16/07/2025", author: "Fernando"},
+      {text: "🎯 Alinhamento futuro com equipe técnica", timestamp: "16/07/2025", author: "Pedro Espinoza"}
+    ], startDate: '2025-09-01', endDate: '2025-09-30', progress: 10 }
   });
 
   const [newComment, setNewComment] = useState<{[key: string]: string}>({});
@@ -186,6 +221,16 @@ const EnelxProgressDashboard = () => {
       status: 'in-progress'
     },
     
+    // HSM e Campanhas - NOVA SEÇÃO
+    'infra-hsm': { 
+      title: 'HSM e Campanhas WhatsApp (Agosto)', 
+      responsible: 'Carlos Junior + Equipe Enel', 
+      category: 'infra', 
+      priority: 'high',
+      section: 'Infraestrutura e Sistemas',
+      status: 'in-progress'
+    },
+    
     // Inovação: Monitoramento IA - NOVA SEÇÃO
     'ia-monitoramento': { 
       title: 'Sistema de Monitoramento com Inteligência Artificial', 
@@ -193,6 +238,16 @@ const EnelxProgressDashboard = () => {
       category: 'ia', 
       priority: 'high',
       section: 'Inovação: Monitoramento IA',
+      status: 'in-progress'
+    },
+    
+    // Revisão URA - FUTURO
+    'gestao-ura': { 
+      title: 'Revisão e Modernização da URA', 
+      responsible: 'Fernando + Equipe Técnica', 
+      category: 'gestao', 
+      priority: 'normal',
+      section: 'Gestão do Projeto',
       status: 'in-progress'
     }
   };
