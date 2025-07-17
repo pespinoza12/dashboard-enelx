@@ -1,8 +1,17 @@
 # Claude Code Session History - Dashboard Manager EnelX
 
 ## 🎯 PROYECTO COMPLETADO EXITOSAMENTE
-**URL en producción:** https://relatorios-dashboardenelx.tnrk2n.easypanel.host/
+**URL en producción:** https://relatorios-enelx.tnrk2n.easypanel.host/
 **Estado:** ✅ FUNCIONANDO CORRECTAMENTE
+
+## 🚀 DEPLOY AUTOMÁTICO EASYPANEL
+**Endpoint para redeploy automático:** 
+```
+http://38.242.207.133:3000/api/deploy/25c125cfc5635d4a61bfbb0a61c4c1b1aa7aa2a458cecb5a
+```
+- Claude puede usar este endpoint para hacer redeploy automático
+- No requiere acceso manual a EasyPanel
+- Activa después de cada push a GitHub
 
 ## 📋 RESUMEN DEL PROYECTO
 - **Nombre:** Dashboard Manager para EnelX B2C 2025

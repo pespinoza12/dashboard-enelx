@@ -66,6 +66,11 @@ app.get('/api/dashboard', (req, res) => {
   });
 });
 
+// Servir API Tester
+app.get('/api-tester', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/src/api-tester.html'));
+});
+
 /**
  * API Endpoint para crear/actualizar dashboards.
  * Aquí implementaremos la lógica para modificar dashboards dinámicamente.
