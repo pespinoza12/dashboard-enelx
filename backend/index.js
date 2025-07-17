@@ -91,10 +91,19 @@ process.on('SIGTERM', () => {
   console.log('🛑 SIGTERM received, shutting down gracefully...');
   console.log('🔍 Process uptime:', process.uptime(), 'seconds');
   console.log('🔍 Memory usage:', process.memoryUsage());
-  server.close(() => {
-    console.log('✅ Server closed gracefully');
-    process.exit(0);
+  console.log('🔍 Environment variables:', {
+    NODE_ENV: process.env.NODE_ENV,
+    PORT: process.env.PORT,
+    PWD: process.env.PWD
   });
+  
+  // Dar tiempo para que las conexiones se cierren
+  setTimeout(() => {
+    server.close(() => {
+      console.log('✅ Server closed gracefully');
+      process.exit(0);
+    });
+  }, 1000);
 });
 
 process.on('SIGINT', () => {
