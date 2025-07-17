@@ -375,15 +375,15 @@ const EnelxProgressDashboard = () => {
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-between">
             <div className="mb-6 lg:mb-0">
               <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center mr-4">
-                  <TrendingUp className="w-6 h-6 text-white" />
+                <div className="w-14 h-14 bg-white/20 rounded-xl flex items-center justify-center mr-4 p-2">
+                  <img src="/wa-logo.svg" alt="WA Contact Center" className="w-full h-full" />
                 </div>
                 <div>
                   <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-white to-blue-100 bg-clip-text text-transparent">
-                    DASHBOARD PROJETO ENELX B2C 2025
+                    DASHBOARD ENELX - WA CONTACT CENTER
                   </h1>
                   <p className="text-blue-100 text-lg font-medium">
-                    WA Contact Center | Status Atualizado - Julho 2025
+                    Projeto B2C 2025 | Status Atualizado - Julho 2025
                   </p>
                 </div>
               </div>
@@ -810,8 +810,12 @@ const EnelxProgressDashboard = () => {
 
         {/* Footer */}
         <div className="mt-6 text-center text-gray-500">
-          <p className="text-sm">WA Contact Center | Projeto EnelX B2C | Dashboard atualizado: 17/07/2025 v2</p>
-          <p className="text-xs mt-1">🎯 Equipe: 27 profissionais | 📅 Treinamentos: 23/07 | 🚀 Go-live: 1º de agosto</p>
+          <div className="flex items-center justify-center gap-2 mb-2">
+            <img src="/wa-logo.svg" alt="WA Contact Center" className="w-5 h-5" />
+            <p className="text-sm font-medium">Dashboard EnelX - WA Contact Center</p>
+          </div>
+          <p className="text-xs">🎯 Equipe: 27 profissionais | 📅 Treinamentos: 23/07 | 🚀 Go-live: 1º de agosto</p>
+          <p className="text-xs text-gray-400 mt-1">Atualizado: 17/07/2025 | Powered by Claude Code Agent</p>
         </div>
       </div>
     </div>
